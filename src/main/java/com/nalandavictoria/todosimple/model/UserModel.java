@@ -8,11 +8,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class UserModel {
     public interface UserCreate{}
     public interface UserUpdate{}
@@ -31,4 +34,7 @@ public class UserModel {
     @Length(groups = {UserCreate.class, UserUpdate.class}, min = 6, max = 30)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<TaskModel> tasks = new ArrayList<TaskModel>();
 }

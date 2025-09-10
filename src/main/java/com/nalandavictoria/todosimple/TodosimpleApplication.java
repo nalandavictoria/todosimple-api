@@ -7,8 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TodosimpleApplication {
 
 	public static void main(String[] args) {
-		 
-        SpringApplication.run(TodosimpleApplication.class, args);
+		SpringApplication.run(TodosimpleApplication.class, args);
 	}
 
 }
