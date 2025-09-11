@@ -1,5 +1,6 @@
 package com.nalandavictoria.todosimple.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -22,5 +23,6 @@ public class TaskModel {
 
     @ManyToOne
     @JoinColumn(name = "userID", nullable = false)
+    @JsonIgnore
     private UserModel user;
 }
