@@ -1,6 +1,7 @@
 package com.nalandavictoria.todosimple.rest.controller;
 
 import com.nalandavictoria.todosimple.model.TaskModel;
+import com.nalandavictoria.todosimple.rest.dto.TasksDTO;
 import com.nalandavictoria.todosimple.service.TaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,22 +19,22 @@ public class TaskController {
     private final TaskService taskService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<TaskModel> findById (@PathVariable Long id){
-        TaskModel taskModel = taskService.findById(id);
-        return ResponseEntity.ok(taskModel);
+    public ResponseEntity<TasksDTO> findById (@PathVariable Long id){
+        TasksDTO tasksDTO = taskService.findById(id);
+        return ResponseEntity.ok(tasksDTO);
     }
 
     @PostMapping()
     @Validated
-    public ResponseEntity<TaskModel> create (@Valid @RequestBody TaskModel taskModel){
-        TaskModel newTask = taskService.create(taskModel);
+    public ResponseEntity<TasksDTO> create (@Valid @RequestBody TaskModel taskModel){
+        TasksDTO newTask = taskService.create(taskModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(newTask);
     }
 
     @PutMapping("/{id}")
     @Validated
-    public ResponseEntity<TaskModel> update (@Valid @RequestBody TaskModel taskModel, @PathVariable Long id){
-        TaskModel updateTask = taskService.update(taskModel);
+    public ResponseEntity<TasksDTO> update (@Valid @RequestBody TaskModel taskModel, @PathVariable Long id){
+        TasksDTO updateTask = taskService.update(taskModel);
         return ResponseEntity.ok(updateTask);
     }
 
@@ -44,8 +45,8 @@ public class TaskController {
     }
 
     @GetMapping("/user/{userID}")
-    public ResponseEntity<List<TaskModel>> findAllByUserID (@PathVariable Long userID){
-        List<TaskModel> findAllByUserID = taskService.findAllByUserID(userID);
+    public ResponseEntity<List<TasksDTO>> findAllByUserID (@PathVariable Long userID){
+        List<TasksDTO> findAllByUserID = taskService.findAllByUserID(userID);
         return ResponseEntity.ok(findAllByUserID);
     }
 }

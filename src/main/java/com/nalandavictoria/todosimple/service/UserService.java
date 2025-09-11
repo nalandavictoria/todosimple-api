@@ -2,6 +2,7 @@ package com.nalandavictoria.todosimple.service;
 
 import com.nalandavictoria.todosimple.model.UserModel;
 import com.nalandavictoria.todosimple.repository.UserRepository;
+import com.nalandavictoria.todosimple.rest.dto.UserDTO;
 import com.nalandavictoria.todosimple.service.exceptions.DataBindingViolationException;
 import com.nalandavictoria.todosimple.service.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -9,29 +10,38 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
 
-    public UserModel findById (Long id){
-        return userRepository.findById(id)
+    public UserDTO findById (Long id){
+        UserModel userModel = userRepository.findById(id)
             .orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado."));
+        return new UserDTO(userModel);
     }
 
+    public UserModel findEntityById (Long id){
+        UserModel userModel = userRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado."));
+        return userModel;
+    }
+
+
     @Transactional
-    public UserModel create (UserModel userModel){
+    public UserDTO create (UserModel userModel){
         userModel.setId(null);
-        return userRepository.save(userModel);
+        UserModel created = userRepository.save(userModel);
+        return new UserDTO(created);
     }
 
     @Transactional
-    public UserModel update (UserModel userModel){
-        UserModel newUser = findById(userModel.getId());
-        newUser.setPassword(userModel.getPassword());
-        return userRepository.save(newUser);
+    public UserDTO update (UserModel userModel){
+        UserModel user = userRepository.findById(userModel.getId())
+                .orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado."));
+        user.setPassword(userModel.getPassword());
+        UserModel newUser = userRepository.save(user);
+        return new UserDTO(newUser);
     }
 
     @Transactional

@@ -1,6 +1,7 @@
 package com.nalandavictoria.todosimple.repository;
 
 import com.nalandavictoria.todosimple.model.TaskModel;
+import com.nalandavictoria.todosimple.rest.dto.TasksDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,6 +15,6 @@ public interface TaskRepository extends JpaRepository<TaskModel, Long> {
             SELECT t FROM TaskModel t
             WHERE t.user.id = :userID
             """)
-    List<TaskModel> findAllByUserID (@Param("userID") Long userID);
+    List<TasksDTO> findAllByUserID (@Param("userID") Long userID);
 
 }
