@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TaskService {
@@ -16,6 +18,11 @@ public class TaskService {
     public TaskModel findById(Long id){
         return taskRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Tarefa não encontrada."));
+    }
+
+    public List<TaskModel> findAllByUserID (Long id){
+        UserModel user = userService.findById(id);
+        return taskRepository.findAllByUserID(id);
     }
 
     @Transactional

@@ -14,6 +14,6 @@ public interface TaskRepository extends JpaRepository<TaskModel, Long> {
             SELECT t FROM TaskModel t
             WHERE t.user.id = :userID
             """)
-    List<TaskModel> tasksUser (@Param("userID") Long userID);
+    List<TaskModel> findAllByUserID (@Param("userID") Long userID);
 
 }
