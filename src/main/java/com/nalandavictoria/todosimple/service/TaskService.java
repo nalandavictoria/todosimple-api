@@ -3,6 +3,7 @@ package com.nalandavictoria.todosimple.service;
 import com.nalandavictoria.todosimple.model.TaskModel;
 import com.nalandavictoria.todosimple.model.UserModel;
 import com.nalandavictoria.todosimple.repository.TaskRepository;
+import com.nalandavictoria.todosimple.service.exceptions.DataBindingViolationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +47,7 @@ public class TaskService {
         try {
             taskRepository.deleteById(id);
         } catch (Exception e) {
-            throw new RuntimeException("Não foi possível excluir a tarefa.");
+            throw new DataBindingViolationException("Não foi possível excluir a tarefa, , pois há entidades relacionadas.");
         }
     }
 }

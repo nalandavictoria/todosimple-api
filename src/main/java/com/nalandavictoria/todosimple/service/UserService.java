@@ -2,6 +2,8 @@ package com.nalandavictoria.todosimple.service;
 
 import com.nalandavictoria.todosimple.model.UserModel;
 import com.nalandavictoria.todosimple.repository.UserRepository;
+import com.nalandavictoria.todosimple.service.exceptions.DataBindingViolationException;
+import com.nalandavictoria.todosimple.service.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ public class UserService {
 
     public UserModel findById (Long id){
         return userRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+            .orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado."));
     }
 
     @Transactional
@@ -38,9 +40,7 @@ public class UserService {
         try {
             userRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new RuntimeException("Não foi possível excluir o usuário, pois há entidades relacionadas.");
-        } catch (Exception e) {
-            throw new RuntimeException("Não foi possível excluir o usuário.");
+            throw new DataBindingViolationException("Não foi possível excluir o usuário, pois há entidades relacionadas.");
         }
     }
 }
