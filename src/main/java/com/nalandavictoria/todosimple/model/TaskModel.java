@@ -17,7 +17,7 @@ public class TaskModel {
     private Long id;
 
     @Column(name = "description", length = 255, nullable = false)
-    @NotBlank
+    @NotBlank(message = "A descrição é obrigatória.")
     private String description;
 
     @ManyToOne

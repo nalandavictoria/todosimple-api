@@ -25,13 +25,13 @@ public class UserModel {
     private Long id;
 
     @Column(name = "name", nullable = false, unique = true)
-    @NotBlank(groups = UserCreate.class)
-    @Length(groups = UserCreate.class, min = 5, max = 150)
+    @NotBlank(groups = UserCreate.class, message = "O nome é obrigatório.")
+    @Length(groups = UserCreate.class, min = 5, max = 150, message = "Deve haver de 5 a 150 caracteres.")
     private String name;
 
     @Column(name = "password", nullable = false)
-    @NotBlank(groups = {UserCreate.class, UserUpdate.class})
-    @Length(groups = {UserCreate.class, UserUpdate.class}, min = 6, max = 30)
+    @NotBlank(groups = {UserCreate.class, UserUpdate.class}, message = "A senha é obrigatória.")
+    @Length(groups = {UserCreate.class, UserUpdate.class}, min = 6, max = 30, message = "Deve haver de 6 a 30 caracteres.")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
