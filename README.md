@@ -50,7 +50,7 @@ Siga as instruções abaixo para configurar e executar o projeto em seu ambiente
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/nalandavictoria/todosimple-api.git](https://github.com/nalandavictoria/todosimple-api.git)
+    git clone https://github.com/nalandavictoria/todosimple-api.git
     cd todosimple-api
     ```
 
@@ -67,13 +67,14 @@ Siga as instruções abaixo para configurar e executar o projeto em seu ambiente
 ### Executando a Aplicação
 
 Você pode executar a aplicação utilizando o Maven Wrapper incluído no projeto:
-
 ```bash
 # No Linux ou macOS
 ./mvnw spring-boot:run
 
 # No Windows
 ./mvnw.cmd spring-boot:run
+````
+
 A API estará disponível em `http://localhost:8080`.
 
 ## 📖 Documentação da API
@@ -98,16 +99,17 @@ Aqui estão os endpoints disponíveis na API.
     "name": "Nome do Usuário",
     "password": "umaSenhaForte"
 }
+```
 
 ## 📝 Recurso: Tarefa (`/task`)
 
-| Método | Endpoint               | Descrição                                |
-|--------|----------------------|-----------------------------------------|
-| GET    | `/task/{id}`          | Busca uma tarefa pelo seu ID.           |
-| POST   | `/task`               | Cria uma nova tarefa.                   |
-| PUT    | `/task/{id}`          | Atualiza uma tarefa existente.         |
-| DELETE | `/task/{id}`          | Deleta uma tarefa.                      |
-| GET    | `/task/user/{userId}` | Lista todas as tarefas de um usuário.  |
+| Método | Endpoint              | Descrição                               |
+|:---|:---|:---|
+| `GET`    | `/task/{id}`          | Busca uma tarefa pelo seu ID.           |
+| `POST`   | `/task`               | Cria uma nova tarefa.                   |
+| `PUT`    | `/task/{id}`          | Atualiza uma tarefa existente.          |
+| `DELETE` | `/task/{id}`          | Deleta uma tarefa.                      |
+| `GET`    | `/task/user/{userId}` | Lista todas as tarefas de um usuário.   |
 
 ### 📤 Exemplo: Criar uma nova tarefa
 
@@ -122,4 +124,4 @@ Aqui estão os endpoints disponíveis na API.
     "id": 1
   }
 }
-
+```
